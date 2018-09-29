@@ -1,6 +1,10 @@
 import express from 'express'
 import bodyParser from 'body-parser'
 
+import webhook from './routes/webhook'
+import chatfuel from './routes/chatfuel'
+
+
 const app = express();
 
 app.use(bodyParser.json())
@@ -9,6 +13,9 @@ app.use(bodyParser.urlencoded({
 }))
 
 app.get('/ping', (_, res) => res.send("pong"))
+
+app.use('/chatfuel', chatfuel)
+app.use('/webhook', webhook)
 
 function runServer(port = process.env.PORT || 3000, done) {
     app.listen(port, async err => {
