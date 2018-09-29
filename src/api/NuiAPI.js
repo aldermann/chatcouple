@@ -9,7 +9,9 @@ export function sendText(senderId, msg) {
         message: {
             text: msg
         }
-    }).then(console.timeEnd("Create User")).catch(err =>
+    })
+    // .then(console.timeEnd("Test"))
+    .catch(err =>
         console.error('Error sending message: ', err)
     )
 }

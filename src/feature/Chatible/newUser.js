@@ -26,6 +26,7 @@ export default (senderId, timestamp) => {
                             _id: senderId,
                         }), err => {
                             if (err) console.error(err);
+                            cache.put(senderId, 0);
                         })
                     }
                     db.close(null, () => resolve(null))

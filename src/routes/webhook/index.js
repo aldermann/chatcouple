@@ -8,7 +8,7 @@ import {
 const Router = express.Router();
 
 Router.post('/', (req, res) => {
-    console.time("Create User")
+    // console.time("Test")
     for (let entry of req.body.entry) {
         for (let message of entry.messaging) {
             const senderId = message.sender.id;

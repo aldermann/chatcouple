@@ -19,16 +19,16 @@ export default (senderId, timestamp) => {
                     if (err) console.error(err);
                     if (!res) {
                         db.db(process.env.MONGODB_NAME || process.env.MONGODB_URI.split("/")[3]).collection("users").insertOne(Object.assign({}, await getUserData(senderId), {
-                            status: 1,
-                            timestamp: timestamp,
+                            status: 0,
+                            timestamp: null,
                             favorite: "any",
                             createAt: timestamp,
                             _id: senderId,
                             idCouple: null
                         }), err => {
                             if (err) console.error(err);
-                            cache.put(senderId, 1);
-                            db.close(null, () => resolve(null))
+                            cache.put(senderId, 0);
+                            db.close(null, () => resolve(0))
                         })
                     } else {
                         if (res.idCouple) {
