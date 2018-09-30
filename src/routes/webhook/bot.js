@@ -6,6 +6,8 @@ import InsertUser from '../../feature/Chatible/newUser'
 import findUser from '../../feature/Chatible/findUser'
 import userSendRequest from '../../feature/Chatible/userSendRequest'
 import findPair from '../../feature/Chatible/findPair'
+import bye from '../../feature/Chatible/bye'
+
 
 export async function processPostback(senderId, payload, timestamp) {
     switch (payload) {
@@ -23,10 +25,19 @@ export async function handleText(senderId, message, timestamp) {
     if (status === 0) {
         await userSendRequest(senderId, timestamp)
         findPair()
-        sendText(senderId, process.env.REQUEST_MSG)
-    } else if (status === 1) {
-        sendText(senderId, process.env.REQUESTED_MSG)
-    } else {
-        sendText(status, message)
+        return sendText(senderId, process.env.REQUEST_MSG)
+    }
+    processText(senderId, status, message)
+}
+
+function processText(senderId, status, message) {
+    switch (message) {
+        case "pp":
+            {
+                if (status === 1) return bye(senderId)
+                return bye(senderId, status)
+            }
+        default:
+            return sendText(status, message)
     }
 }
