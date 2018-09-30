@@ -43,6 +43,7 @@ export async function processPostback(senderId, payload, timestamp) {
 }
 
 export async function handleText(senderId, message, timestamp) {
+    if (message === "#id") return sendText(senderId, senderId.toString())
     const status = await findUser(senderId, timestamp)
     if (status === 0) {
         await userSendRequest(senderId, timestamp)
