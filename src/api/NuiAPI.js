@@ -42,3 +42,19 @@ export function sendButton(senderId, title, buttons) {
             console.error('Error sending message: ', err)
         )
 }
+
+export function sendQuickReplies(senderId, title, buttons) {
+    axios.post(`http://api.chatbot.ngxson.com/graph/me/messages?access_token=${process.env.TOKEN_NUI}`, {
+            messaging_type: "RESPONSE",
+            recipient: {
+                id: senderId
+            },
+            message: {
+                text: title,
+                quick_replies: buttons
+            }
+        })
+        .catch(err =>
+            console.error('Error sending message: ', err)
+        )
+}

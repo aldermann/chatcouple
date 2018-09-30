@@ -1,6 +1,7 @@
 import {
     sendText,
-    sendButton
+    // sendButton,
+    sendQuickReplies
 } from '../../api/NuiAPI'
 
 import InsertUser from '../../feature/Chatible/newUser'
@@ -17,8 +18,8 @@ import {
     CHANGE_GENDER
 } from '../../variable/lang'
 
-import button from '../../util/button'
-
+// import button from '../../util/button'
+import quickReplies from "../../util/quickreplies";
 export async function processPostback(senderId, payload, timestamp) {
     switch (payload) {
         case "GETTING_STARTED":
@@ -28,7 +29,11 @@ export async function processPostback(senderId, payload, timestamp) {
         case "INSTRODUCTION":
             return sendText(senderId, process.env.INSTRODUCTION || INSTRODUCTION)
         case "CHANGE_FAVORITE":
-            return sendButton(senderId, process.env.CHANGE_GENDER || CHANGE_GENDER, [button("postback", "CHANGE_MALE", "Nam"), button("postback", "CHANGE_FEMALE", "Nữ"), button("postback", "CHANGE_ANY", "Ai cũng được :>")])
+            return sendQuickReplies(senderId, process.env.CHANGE_GENDER || CHANGE_GENDER, [
+                quickReplies("text", "Nam", "https://xn--i-7iq.ws/emoji-image/%F0%9F%91%A6.png?format=ios", "CHANGE_MALE"),
+                quickReplies("text", "Nữ", "https://xn--i-7iq.ws/emoji-image/%F0%9F%91%A7.png?format=ios", "CHANGE_FEMALE"),
+                quickReplies("text", "Anyone", "https://xn--i-7iq.ws/emoji-image/%F0%9F%91%AB.png?format=ios", "CHANGE_ANY")
+            ])
         case "CHANGE_MALE":
             return changeFavorite(senderId, "male")
         case "CHANGE_FEMALE":
