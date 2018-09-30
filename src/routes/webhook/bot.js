@@ -14,6 +14,7 @@ import {
     WELCOME_TEXT,
     INSTRODUCTION,
     REQUEST_MSG,
+    REQUESTED_MSG,
     CHANGE_GENDER
 } from '../../variable/lang'
 
@@ -33,11 +34,11 @@ export async function processPostback(senderId, payload, timestamp) {
                 quickReplies("text", "Anyone", "https://xn--i-7iq.ws/emoji-image/%F0%9F%91%AB.png?format=ios", "CHANGE_ANY")
             ])
         case "CHANGE_MALE":
-            return changeFavorite(senderId, "male")
+            return changeFavorite(senderId, "male");
         case "CHANGE_FEMALE":
-            return changeFavorite(senderId, "female")
+            return changeFavorite(senderId, "female");
         case "CHANGE_ANY":
-            return changeFavorite(senderId, "any")
+            return changeFavorite(senderId, "any");
     }
 }
 
@@ -59,6 +60,7 @@ function processText(senderId, status, message) {
                 return bye(senderId, status)
             }
         default:
+            if (status === 1) return sendText(senderId, process.env.REQUESTED_MSG || REQUESTED_MSG)
             return sendText(status, message)
     }
 }

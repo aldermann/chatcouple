@@ -16,6 +16,7 @@ Router.post('/', (req, res) => {
                 processPostback(senderId, message.postback.payload, timestamp);
             } else if (message.message) {
                 if (message.message.quick_reply) {
+                    // Handle quick replies
                     processPostback(senderId, message.message.quick_reply.payload, timestamp);
                 } else if (message.message.text) {
                     // User gửi text

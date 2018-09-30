@@ -4,7 +4,6 @@ import bodyParser from 'body-parser'
 import webhook from './routes/webhook'
 import chatfuel from './routes/chatfuel'
 
-
 const app = express();
 
 app.use(bodyParser.json())

@@ -29,6 +29,7 @@ export default (id1, id2 = null) => {
             if (err) console.error(err)
             if (!id2) {
                 return db.close(null, () => {
+                    cache.put(id1, 0);
                     sendText(id1, process.env.USER_CANCEL || USER_CANCEL);
                 })
             }
