@@ -5,6 +5,11 @@ import {
     handleText
 } from './bot'
 
+import findUser from '../../feature/Chatible/findUser'
+import Pair from '../../feature/Chatible/pair'
+
+import cache from 'memory-cache'
+
 const Router = express.Router();
 
 Router.post('/', (req, res) => {
@@ -30,5 +35,18 @@ Router.post('/', (req, res) => {
     res.sendStatus(200)
 });
 
+Router.post('/pair', async (req, res) => {
+    const result = await Promise.all([findUser(req.body.id1), findUser(req.body.id2)]);
+    console.log(result);
+    if ((result[0] === 0 || result[0] === 1) && (result[1] === 0 || result[1] === 1)) {
+        Pair(req.body.id1, req.body.id2)
+        return res.send("Ok");
+    }
+    return res.send("Something went wrong");
+})
+
+Router.get('/debug', (req, res) => {
+    res.send(cache.keys())
+})
 
 export default Router;

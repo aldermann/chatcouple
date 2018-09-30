@@ -6,7 +6,7 @@ import {
 
 const MongoClient = mongodb.MongoClient;
 
-export default (senderId, timestamp) => {
+export default (senderId, timestamp=null) => {
     return new Promise(resolve => {
         if (!cache.get(senderId)) {
             MongoClient.connect(process.env.MONGODB_URI, {
