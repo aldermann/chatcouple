@@ -12,16 +12,17 @@ Router.post('/', (req, res) => {
         for (let message of entry.messaging) {
             const senderId = message.sender.id;
             const timestamp = message.timestamp
-            if (message.message) {
-                if (message.message.text) {
+            if (message.postback) {
+                processPostback(senderId, message.postback.payload, timestamp);
+            } else if (message.message) {
+                if (message.message.quick_reply) {
+                    processPostback(senderId, message.message.quick_reply.payload, timestamp);
+                } else if (message.message.text) {
                     // User gửi text
                     handleText(senderId, message.message.text, timestamp)
                 } else if (message.message.attachments) {
                     //Send hình or vid or anything ?
                 }
-            } else if (message.postback) {
-                // Bấm nút ?
-                processPostback(senderId, message.postback.payload, timestamp);
             }
         }
     }

@@ -1,6 +1,5 @@
 import {
     sendText,
-    // sendButton,
     sendQuickReplies
 } from '../../api/NuiAPI'
 
@@ -18,7 +17,6 @@ import {
     CHANGE_GENDER
 } from '../../variable/lang'
 
-// import button from '../../util/button'
 import quickReplies from "../../util/quickreplies";
 export async function processPostback(senderId, payload, timestamp) {
     switch (payload) {
