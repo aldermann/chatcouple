@@ -53,7 +53,7 @@ export async function handleText(senderId, message, timestamp) {
 }
 
 function processText(senderId, status, message) {
-    switch (message) {
+    switch (message.toLowerCase()) {
         case "pp":
             {
                 if (status === 1) return bye(senderId)
