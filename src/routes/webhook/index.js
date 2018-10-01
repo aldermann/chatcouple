@@ -27,7 +27,9 @@ Router.post('/', (req, res) => {
                     // User gửi text
                     handleText(senderId, message.message.text, timestamp)
                 } else if (message.message.attachments) {
-                    //Send hình or vid or anything ?
+                    message.message.attachments.forEach(v => {
+                        handleText(senderId, v.payload.url, timestamp, v.type)
+                    })
                 }
             }
         }
@@ -46,7 +48,7 @@ Router.post('/pair', async (req, res) => {
 })
 
 Router.get('/debug', (req, res) => {
-    res.send(cache.keys())
+    res.send("OK")
 })
 
 export default Router;
