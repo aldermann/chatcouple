@@ -58,3 +58,24 @@ export function sendQuickReplies(senderId, title, buttons) {
             console.error('Error sending message: ', err)
         )
 }
+
+export function sendAttachment(senderId, type, payload) {
+    axios.post(`http://api.chatbot.ngxson.com/graph/me/messages?access_token=${process.env.TOKEN_NUI}`, {
+            messaging_type: "RESPONSE",
+            recipient: {
+                id: senderId
+            },
+            message: {
+                attachment: {
+                    type: type,
+                    payload: {
+                        url: payload,
+                        is_reusable: true
+                    }
+                }
+            }
+        })
+        .catch(err =>
+            console.error('Error sending message: ', err)
+        )
+}

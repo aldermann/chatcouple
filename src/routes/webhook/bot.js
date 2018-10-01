@@ -1,6 +1,7 @@
 import {
     sendText,
-    sendQuickReplies
+    sendQuickReplies,
+    sendAttachment
 } from '../../api/NuiAPI'
 
 import InsertUser from '../../feature/Chatible/newUser'
@@ -9,6 +10,7 @@ import userSendRequest from '../../feature/Chatible/userSendRequest'
 import findPair from '../../feature/Chatible/findPair'
 import bye from '../../feature/Chatible/bye'
 import changeFavorite from '../../feature/Chatible/changeFavorite';
+
 
 import {
     WELCOME_TEXT,
@@ -42,17 +44,18 @@ export async function processPostback(senderId, payload, timestamp) {
     }
 }
 
-export async function handleText(senderId, message, timestamp) {
+export async function handleText(senderId, message, timestamp, type = null) {
+    if (message === "#id") return sendText(senderId, senderId.toString())
     const status = await findUser(senderId, timestamp)
     if (status === 0) {
         await userSendRequest(senderId, timestamp)
         findPair()
         return sendText(senderId, process.env.REQUEST_MSG || REQUEST_MSG)
     }
-    processText(senderId, status, message)
+    processText(senderId, status, message, type)
 }
 
-function processText(senderId, status, message) {
+function processText(senderId, status, message, type = null) {
     switch (message.toLowerCase()) {
         case "pp":
             {
@@ -61,6 +64,7 @@ function processText(senderId, status, message) {
             }
         default:
             if (status === 1) return sendText(senderId, process.env.REQUESTED_MSG || REQUESTED_MSG)
+            if (type) return sendAttachment(status, type, message)
             return sendText(status, message)
     }
 }
