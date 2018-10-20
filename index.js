@@ -1,9 +1,7 @@
-import dotenv from 'dotenv'
+import dotenv from 'dotenv';
 
-import {
-    runServer
-} from "./src/app";
+import { runServer } from './src/app';
 
-dotenv.config()
+dotenv.config();
 
 runServer(process.env.PORT || 3000);
