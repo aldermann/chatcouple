@@ -5,6 +5,7 @@ import webhook from './routes/webhook';
 import chatfuel from './routes/chatfuel';
 
 const app = express();
+import dotenv from "dotenv"
 
 app.use(bodyParser.json());
 app.use(
@@ -12,7 +13,7 @@ app.use(
         extended: true
     })
 );
-
+dotenv.config()
 app.get('/ping', (_, res) => res.send('pong'));
 
 app.use('/chatfuel', chatfuel);

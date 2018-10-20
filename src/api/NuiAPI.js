@@ -1,4 +1,34 @@
-import axios from 'axios';
+import axios from "axios";
+
+export function sendTemplatedMessage(senderId, title, msg) {
+    axios
+        .post(
+            `http://api.chatbot.ngxson.com/graph/me/messages?access_token=${
+                process.env.TOKEN_NUI
+            }`,
+            {
+                messaging_type: "RESPONSE",
+                recipient: {
+                    id: senderId
+                },
+                message: {
+                    attachment: {
+                        type: "template",
+                        payload: {
+                            template_type: "generic",
+                            elements: [
+                                {
+                                    title: title,
+                                    subtitle: msg
+                                }
+                            ]
+                        }
+                    }
+                }
+            }
+        )
+        .catch(err => console.error("Error sending message: ", err));
+}
 
 export function sendText(senderId, msg) {
     axios
@@ -7,7 +37,7 @@ export function sendText(senderId, msg) {
                 process.env.TOKEN_NUI
             }`,
             {
-                messaging_type: 'RESPONSE',
+                messaging_type: "RESPONSE",
                 recipient: {
                     id: senderId
                 },
@@ -16,7 +46,7 @@ export function sendText(senderId, msg) {
                 }
             }
         )
-        .catch(err => console.error('Error sending message: ', err));
+        .catch(err => console.error("Error sending message: ", err));
 }
 
 export function getUserData(senderId) {
@@ -38,15 +68,15 @@ export function sendButton(senderId, title, buttons) {
                 process.env.TOKEN_NUI
             }`,
             {
-                messaging_type: 'RESPONSE',
+                messaging_type: "RESPONSE",
                 recipient: {
                     id: senderId
                 },
                 message: {
                     attachment: {
-                        type: 'template',
+                        type: "template",
                         payload: {
-                            template_type: 'button',
+                            template_type: "button",
                             text: title,
                             buttons: buttons
                         }
@@ -54,7 +84,7 @@ export function sendButton(senderId, title, buttons) {
                 }
             }
         )
-        .catch(err => console.error('Error sending message: ', err));
+        .catch(err => console.error("Error sending message: ", err));
 }
 
 export function sendQuickReplies(senderId, title, buttons) {
@@ -64,7 +94,7 @@ export function sendQuickReplies(senderId, title, buttons) {
                 process.env.TOKEN_NUI
             }`,
             {
-                messaging_type: 'RESPONSE',
+                messaging_type: "RESPONSE",
                 recipient: {
                     id: senderId
                 },
@@ -74,7 +104,7 @@ export function sendQuickReplies(senderId, title, buttons) {
                 }
             }
         )
-        .catch(err => console.error('Error sending message: ', err));
+        .catch(err => console.error("Error sending message: ", err));
 }
 
 export function sendAttachment(senderId, type, payload) {
@@ -84,7 +114,7 @@ export function sendAttachment(senderId, type, payload) {
                 process.env.TOKEN_NUI
             }`,
             {
-                messaging_type: 'RESPONSE',
+                messaging_type: "RESPONSE",
                 recipient: {
                     id: senderId
                 },
@@ -99,5 +129,5 @@ export function sendAttachment(senderId, type, payload) {
                 }
             }
         )
-        .catch(err => console.error('Error sending message: ', err));
+        .catch(err => console.error("Error sending message: ", err));
 }

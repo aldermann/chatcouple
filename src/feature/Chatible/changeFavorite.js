@@ -1,8 +1,11 @@
-import mongodb from 'mongodb';
+import mongodb from "mongodb";
 
 const MongoClient = mongodb.MongoClient;
-import { sendText } from '../../api/NuiAPI';
-import { GENDER_CHANGE_SUCCESS } from '../../variable/lang';
+import { sendTemplatedMessage} from "../../api/NuiAPI";
+import {
+    GENDER_CHANGE_SUCCESS,
+    GENDER_CHANGE_SUCCESS_TITLE
+} from "../../variable/lang";
 export default (senderId, favorite) => {
     MongoClient.connect(
         process.env.MONGODB_URI,
@@ -13,9 +16,9 @@ export default (senderId, favorite) => {
             if (err) throw err;
             db.db(
                 process.env.MONGODB_NAME ||
-                    process.env.MONGODB_URI.split('/')[3]
+                    process.env.MONGODB_URI.split("/")[3]
             )
-                .collection('users')
+                .collection("users")
                 .updateOne(
                     {
                         _id: senderId
@@ -28,8 +31,10 @@ export default (senderId, favorite) => {
                     err => {
                         if (err) console.log(error);
                         db.close(null, () => {
-                            return sendText(
+                            return sendTemplatedMessage(
                                 senderId,
+                                process.env.GENDER_CHANGE_SUCESS_TITLE ||
+                                    GENDER_CHANGE_SUCCESS_TITLE,
                                 process.env.GENDER_CHANGE_SUCCESS ||
                                     GENDER_CHANGE_SUCCESS
                             );
