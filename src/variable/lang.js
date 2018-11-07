@@ -18,9 +18,7 @@ export const USER1_PP = "Bạn đã dừng trò chuyện với đối phương";
 export const USER2_PP = "Đối phương dừng trò chuyện với bạn với bạn";
 
 export const INTRODUCTION_TITLE = `Chào mừng bạn đến với ${process.env.NAME || "CSP Heartsync"}.`;
-export const INSTRODUCTION =
-    "Gõ từ bất kỳ để bắt đầu tham gia trò chuyện. Gõ 'pp' để kết thúc";
-
+export const INSTRODUCTION ="Gõ từ bất kỳ để bắt đầu tham gia trò chuyện. Gõ 'pp' để kết thúc";
 export const PAIR_SUCCESS_TITLE = "Tìm kiếm thành công"
 export const PAIR_SUCCESS = "Bạn đã kết nối với 1 người lạ";
 
