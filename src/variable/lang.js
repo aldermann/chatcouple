@@ -17,9 +17,8 @@ export const USER_PP_TITLE = "Cuộc trò chuyện kết thúc";
 export const USER1_PP = "Bạn đã dừng trò chuyện với đối phương";
 export const USER2_PP = "Đối phương dừng trò chuyện với bạn với bạn";
 
-export const INTRODUCTION_TITLE = `Chào mừng bạn đến với ${process.env.NAME}.`;
+export const INTRODUCTION_TITLE = `Chào mừng bạn đến với ${process.env.NAME || "CSP Heartsync"}.`;
 export const INSTRODUCTION =
-    "Để bắt đầu hãy thử nhập vào chatbot một từ bất kỳ.\n" +
     "Bấm vào mục hướng dẫn trong menu để tìm hiểu cách sử dụng.";
 
 export const PAIR_SUCCESS_TITLE = "Tìm kiếm thành công"

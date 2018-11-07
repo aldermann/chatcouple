@@ -1,9 +1,9 @@
 import cache from 'memory-cache';
 import mongodb from 'mongodb';
 import { getUserData } from '../../api/NuiAPI';
+import { cpus } from 'os';
 
 const MongoClient = mongodb.MongoClient;
-
 export default (senderId, timestamp) => {
     return new Promise(resolve => {
         if (!cache.get(senderId)) {
